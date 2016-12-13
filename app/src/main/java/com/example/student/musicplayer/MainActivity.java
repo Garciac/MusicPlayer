@@ -1,6 +1,7 @@
 package com.example.student.musicplayer;
 
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +11,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button pauseButtonVar, playButtonVar, rewindButtonVar, fastFowardButtonVar, stopButtonVar;
-    pubic TextView currentTimeViewVar, endTimeViewVar;
-    public MediaPlayer stopPlayer;
-    public double endTimeMS;
-    public myHandler = new Handler();
+    public Button pauseButtonVar, playButtonVar, rewindButtonVar, fastForwardButtonVar, stopButtonVar;
+    public TextView currentTimeViewVar, endTimeViewVar;
+    public MediaPlayer songPlayer;
+    public double currentTimeMS ,endTimeMS;
+    public Handler myHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         pauseButtonVar = (Button) findViewById(R.id.pauseButton);
         stopButtonVar = (Button) findViewById(R.id.stopButton);
         rewindButtonVar = (Button) findViewById(R.id.rewindButton);
-        fastFowardButtonVar = (Button) findViewById(R.id.fastFowardButton);
+        fastForwardButtonVar = (Button) findViewById(R.id.fastForwardButton);
 
         currentTimeViewVar = (TextView) findViewById(R.id.currentTimeView);
         endTimeViewVar= (TextView) findViewById(R.id.endTimeView);
 
-        songPlayer = MediaPlayer.create(this, R.raw.song);
+        songPlayer = MediaPlayer.create(this, R.raw.smoothocean);
         endTimeMS = songPlayer.getDuration();
-        int endTimeMin = (int) endTime/1000/60;
+        int endTimeMin = (int) endTimeMS/1000/60;
         int endTimeS = (int) (endTimeMS/1000) % 60;
         endTimeViewVar.setText(endTimeMin + " min," + endTimeS + " sec");
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         songPlayer.pause();
     }
 
-    public void fastFowardSong(View view){
+    public void fastForwardSong(View view){
         Toast.makeText(getApplicationContext(), "Foward 5 second", Toast.LENGTH_SHORT).show();
         if(currentTimeMS < endTimeMS-5000){
         songPlayer.seekTo( (int)currentTimeMS +5000);}
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
-            currentTimeMS = songPlayer.getCurrentPostiton();
+            currentTimeMS = songPlayer.getCurrentPosition();
             int currentTimeMin = (int) currentTimeMS/1000/60;
             int currentTimeS = (int) (currentTimeMS/1000) % 60;
             currentTimeViewVar.setText(currentTimeMin + " min, " + currentTimeS + " sec");

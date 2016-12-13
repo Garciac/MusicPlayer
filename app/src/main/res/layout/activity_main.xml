@@ -58,14 +58,14 @@
         android:onClick="playSong"/>
 
     <Button
-        android:id="@+id/fastFowardButton"
+        android:id="@+id/fastForwardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=">>"
         android:textSize="26sp"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/playButton"
-        android:onClick="playSong"/>
+        android:onClick="fastForwardSong"/>
 
     <Button
         android:id="@+id/rewindButton"
@@ -75,7 +75,7 @@
         android:textSize="26sp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/stopButton"
-        android:onClick="playSong"/>
+        android:onClick="rewindSong"/>
 
     <Button
         android:id="@+id/stopButton"
@@ -85,7 +85,7 @@
         android:textSize="26sp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/pauseButton"
-        android:onClick="playSong"/>
+        android:onClick="stopSong"/>
 
     <TextView
         android:id="@+id/currentTimeView"
@@ -101,8 +101,8 @@
         android:layout_height="wrap_content"
         android:text="0 min, 0 sec"
         android:textSize="20sp"
-        android:layout_above="@id/fastFowardButton"
-        android:layout_alignRight="@id/fastFowardButton"/>
+        android:layout_above="@id/fastForwardButton"
+        android:layout_alignRight="@id/fastForwardButton"/>
 
 
 </RelativeLayout>
